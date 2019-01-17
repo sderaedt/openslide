@@ -3,10 +3,11 @@
 This directory contains a docker image and docker-compose configuration to build openslide for windows on linux using 
 docker and for building a linux debian package.
 
+Default behaviour is to build the windows package.
 
 ```bash
-# Start the docker container
-docker-compose run openslide
+# Start bash in the docker container
+docker-compose run openslide bash
 
 # In the container run one of the following scripts:
 bash build_win.sh 
