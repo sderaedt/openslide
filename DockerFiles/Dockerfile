@@ -12,4 +12,4 @@ COPY build_win.sh /build
 COPY build_linux.sh /build
 COPY build_linux_deb.sh /build
 
-CMD ["bash"]
+CMD ["bash",  "build_win.sh"]
