@@ -18,11 +18,16 @@ cd openslide
 autoreconf -i && ./configure && make distcheck
 
 # Change back to the root directory and run build.sh bdist
+# -m64 specifies to build a 64bit version (-m32 for 32bit)
+# -j16 parallel build with 16 threads
 cd ../../
 bash build.sh -m64 -j16 bdist
 
-# -m64 specifies to build a 64bit version (-m32 for 32bit)
-# -j16 parallel build with 16 threads
-
 # Copy compiled file to release folder mapped in docker image
 cp openslide-win64-*.zip ../release/
+
+# Now, build a 32-bit version also! 
+bash build.sh -m32 -j16 bdist
+
+# Copy compiled file to release folder mapped in docker image
+cp openslide-win32-*.zip ../release/
