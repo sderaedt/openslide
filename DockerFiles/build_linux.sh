@@ -6,7 +6,8 @@ git clone https://github.com/sderaedt/openslide.git
 cd openslide
 
 # Generate the configuration file and run configure
-autoreconf -i && ./configure && make distcheck -j8
+autoreconf -i && ./configure --prefix=/build/openslide_build && make distcheck -j8 && make install
 
-# Copy compiled file to release folder mapped in docker image
-cp openslide-*.tar.gz ../release/
+# Zip files to release folder mapped in docker image
+cd /build/openslide_build 
+zip -r ../release/openslide-linux.zip .
