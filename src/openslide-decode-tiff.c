@@ -305,9 +305,11 @@ bool _openslide_tiff_read_tile(struct _openslide_tiff_level *tiffl,
     // The other half of this fix/hack consists of calling render_missing_tile
     // from decode_tile (in openslide-vendor-aperio) if _openslide_tiff_read_tile
     // returns false.
+    // We check for the start of image marker 0xff 0xd8
     const unsigned char *bytes = buf;
-    if (bytes[0] == 0x11 || (bytes[0] == 0xff && bytes[1] == 0x11))
+    if (bytes[0] != 0xff || bytes[1] != 0xd8) {
       return false; // Garbled tile
+    }
 
     // decompress
     bool ret = decode_jpeg(buf, buflen, tables, tables_len,
